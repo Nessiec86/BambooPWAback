@@ -29,11 +29,11 @@ mongoose
 
 const app = express();
 
-console.log(`CORS on ${process.env.PUBLIC_DOMAIN_FB}`)
+console.log(`CORS on ${process.env.PUBLIC_DOMAIN}`)
 app.use(
   cors({
     credentials: true,
-    origin: [process.env.PUBLIC_DOMAIN_FB],
+    origin: [process.env.PUBLIC_DOMAIN],
   }),
 );
 // app.use((req, res, next) => {
