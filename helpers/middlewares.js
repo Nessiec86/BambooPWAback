@@ -25,3 +25,19 @@ exports.validationLoggin = () => (req, res, next) => {
     next();
   }
 }
+exports.anonRoute = () => (req, res, next) => {
+  if (req.session.currentUser) {
+    res.redirect('/user');
+  } else {
+    next();
+  }
+}
+exports.checkRole = (role) => {
+  return (req, res, next) => {
+    if (req.session.currentUser.role === role) {
+      next();
+    } else {
+      res.redirect('login');
+    }
+  };
+}
