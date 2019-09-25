@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const Card = require('../models/data');
+const Data = require('../models/data');
 
+// CREATE
 
-router.post('/canvas', (req, res, next) => {
-  const { premio } = req.body;
+router.post('/post', (req, res, next) => {
+  const { premio, ip } = req.body;
   
-  console.log(premio)
   Data.create({
     premio,
+    ip,
   })
   .then((data) => {
     res.status(200).json(data);
@@ -17,5 +18,19 @@ router.post('/canvas', (req, res, next) => {
     next(error);
   });
 });
+
+
+// READ ALL
+
+router.get('/list', (req, res, next) => {
+  console.log("pulsado desde front")
+  Data.find()
+    .then(card => {
+      res.status(200)
+      res.json(card)
+    })
+    .catch(next)
+})
+
 
 module.exports = router;
