@@ -28,7 +28,6 @@ mongoose
 
 const app = express();
 
-console.log(`CORS on ${process.env.PUBLIC_DOMAIN}`)
 app.use(
   cors({
     credentials: true,

@@ -23,7 +23,6 @@ router.post('/post', (req, res, next) => {
 // READ ALL
 
 router.get('/list', (req, res, next) => {
-  console.log("pulsado desde front")
   Data.find()
     .then(card => {
       res.status(200)
