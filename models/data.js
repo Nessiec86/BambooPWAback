@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   premio: String,
   ip: String,
-  cordsLat: Number,
-  cordsLon: Number,
+  cordsLat: String,
+  cordsLon: String,
 }, {
   timestamps: {
     createdAt: 'created_at',
