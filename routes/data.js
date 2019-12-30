@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const Newdata = require('../models/data');
+const Data = require('../models/data');
 
 // CREATE
 
 router.post('/post', (req, res, next) => {
   const { premio, ip, cordsLat, cordsLon } = req.body;
   
-  Newdata.create({
+  Data.create({
     premio,
     ip,
     cordsLat,
@@ -25,7 +25,7 @@ router.post('/post', (req, res, next) => {
 // READ ALL
 
 router.get('/list', (req, res, next) => {
-  Newdata.find()
+  Data.find()
     .then(card => {
       res.status(200)
       res.json(card)
