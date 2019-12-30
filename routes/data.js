@@ -5,11 +5,13 @@ const Data = require('../models/data');
 // CREATE
 
 router.post('/post', (req, res, next) => {
-  const { premio, ip } = req.body;
+  const { premio, ip, cordsLat, cordsLon } = req.body;
   
   Data.create({
     premio,
     ip,
+    cordsLat,
+    cordsLon,
   })
   .then((data) => {
     res.status(200).json(data);
