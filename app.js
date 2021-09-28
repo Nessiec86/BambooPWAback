@@ -12,42 +12,41 @@ require('dotenv').config();
 const auth = require('./routes/auth');
 const dataN = require('./routes/data');
 
-
 mongoose
-  .connect(process.env.DB_URL, {
-    keepAlive: true,
-    useNewUrlParser: true,
-    reconnectTries: Number.MAX_VALUE,
-  })
-  .then(() => {
-    console.log(`Connected to database`);
-  })
-  .catch(error => {
-    console.error(error);
-  });
+.connect(process.env.DB_URL, {
+  keepAlive: true,
+  useNewUrlParser: true,
+  reconnectTries: Number.MAX_VALUE,
+})
+.then(() => {
+  console.log(`Connected to database`);
+})
+.catch(error => {
+  console.error(error);
+});
 
 const app = express();
 
 app.use(
-  cors({
-    credentials: true,
-    origin: [process.env.PUBLIC_DOMAIN],
-  }),
+cors({
+  credentials: true,
+  origin: [process.env.PUBLIC_DOMAIN],
+}),
 );
 
 app.use(
-  session({
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
-      ttl: 24 * 60 * 60, // 1 day
-    }),
-    secret: process.env.SECRET_SESSION,
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-      maxAge: 24 * 60 * 60 * 1000,
-    },
+session({
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60, // 1 day
   }),
+  secret: process.env.SECRET_SESSION,
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000,
+  },
+}),
 );
 
 app.use(logger('dev'));
