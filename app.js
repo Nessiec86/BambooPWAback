@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo')//(session);
 const cors = require('cors');
 require('dotenv').config();
 
@@ -36,9 +36,14 @@ cors({
 
 app.use(
 session({
-  store: new MongoStore({
+  // store: new MongoStore({
+  //   mongooseConnection: mongoose.connection,
+  //   ttl: 24 * 60 * 60, // 1 day
+  // }),
+  store: MongoStore.create({
     mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60, // 1 day
+    ttl: 24 * 60 * 60, // 1 day,
+    mongoUrl: process.env.DB_URL
   }),
   secret: process.env.SECRET_SESSION,
   resave: true,
